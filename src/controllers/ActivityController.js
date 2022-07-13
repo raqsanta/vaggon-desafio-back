@@ -20,6 +20,14 @@ module.exports = {
 
     },
 
+    async getAllActivityFromUser(author_id){
+
+        const foundActivity = await Activity.findAll({where: {author_id: author_id}})
+
+        return {type: 'success', message: 'Atividade encontrada com sucesso!', data: foundActivity}
+
+    },
+
     async updateActivity(values){
 
         const {name,description,beginsdate, expiresdate, status} = values

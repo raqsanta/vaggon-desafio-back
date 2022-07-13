@@ -27,6 +27,9 @@ module.exports = {
         status: {
           type: DataTypes.ENUM('Pending', 'Published', 'Cancelled')
         },
+        author_id: {
+          type: DataTypes.UUID
+        },
         createdat: {
           type: DataTypes.DATE
         },

@@ -3,7 +3,6 @@ const User = require('../models/User')
 module.exports = {
 
     async createUser(values){
-
         const {username, password} = values
 
         const hashPW = await User.genHash(password)
@@ -24,8 +23,10 @@ module.exports = {
     async updateUser(values){
 
         const {id, username, password} = values
+
+        const hashPW = await User.genHash(password)
         
-        const updatedUser = await User.update({username: username, password: password}, {where: {id: id}})
+        const updatedUser = await User.update({username: username, password: hashPW}, {where: {id: id}})
     
         return {type: 'success', message: 'User atualizado com sucesso!', data: updatedUser}        
     

@@ -22,6 +22,9 @@ const Activity = database.define('Activity', {
     },
     status: {
         type: DataTypes.ENUM('Pending','Published','Cancelled')
+    },
+    author_id: {
+        type: DataTypes.UUID
     }
 },{
     timestamps: true
