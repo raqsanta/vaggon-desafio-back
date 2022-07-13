@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/raqsanta/vaggon-desafio-back/issues"
   },
-  "homepage": "https://github.com/raqsanta/vaggon-desafio-back#readme"
+  "homepage": "https://github.com/raqsanta/vaggon-desafio-back#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19",
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1"
+  }
 }
