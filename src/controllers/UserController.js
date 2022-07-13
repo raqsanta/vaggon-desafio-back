@@ -6,10 +6,11 @@ module.exports = {
 
         const {username, password} = values
 
-        const createdUser = await User.create({username, password})
+        const hashPW = await User.genHash(password)
 
-        return {type: 'success', message: 'User criado com sucesso!', data: createdUser}        
-        
+        const createdUser = await User.create({username: username, password: hashPW})
+
+        return createdUser
     },
 
     async getUser(id){

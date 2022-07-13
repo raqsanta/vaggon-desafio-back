@@ -26,6 +26,12 @@ module.exports = {
         },
         status: {
           type: DataTypes.ENUM('Pending', 'Published', 'Cancelled')
+        },
+        createdat: {
+          type: DataTypes.DATE
+        },
+        updatedat: {
+          type: DataTypes.DATE
         }
       }
     )

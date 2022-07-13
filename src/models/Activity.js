@@ -23,6 +23,8 @@ const Activity = database.define('Activity', {
     status: {
         type: DataTypes.ENUM('Pending','Published','Cancelled')
     }
+},{
+    timestamps: true
 })
 
 module.exports = Activity;

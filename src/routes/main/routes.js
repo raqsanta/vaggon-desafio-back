@@ -1,16 +1,21 @@
 const express = require('express');
-const ActivityController = require('../../controllers/ActivityController');
+const UserController = require('../../controllers/UserController');
 const router = express.Router();
 
-router.get('/', (req,res)=>{
+router.get('/', (req, res) => {
     return res.json('vc entrou na rota main')
 })
 
-router.get('/teste', async (req,res)=>{
-    
-    const foundActivity = await ActivityController.getActivity(5)
+router.get('/teste', async (req, res) => {
 
-    return res.json(foundActivity)
+    const createdUser = await UserController.createUser(
+        {
+            username: 'duda',
+            password: 'senhateste'
+        }
+    )
+
+    return res.json(createdUser)
 })
 
 module.exports = router

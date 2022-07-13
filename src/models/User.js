@@ -21,11 +21,11 @@ const User = database.define('User', {
     timestamps: true
 })
 
-User.prototype.genHash = function (password){
+User.genHash = function (password){
     return bcrypt.hash(password, bcrypt.genSaltSync(8))
 }
 
-User.prototype.compare = function(password){
+User.compare = function(password){
     return bcrypt.compare(password, this.password)
 }
 
