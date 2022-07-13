@@ -20,14 +20,59 @@ router.get('/teste', async (req, res) => {
     return res.json(createdUser)
 })
 
-router.get('/my-activities', async (req,res)=>{
+router.get('/my-activities', verifyJWT, async (req,res)=>{
 
-    const author_id = req.body.author_id
-    //dps trocar pro jwt
+    const author_id = req.id
  
     const getAllActivities = ActivityController.getAllActivityFromUser(author_id)
     
     return res.json(getAllActivities)
+
+})
+
+router.get('/get-activity/:id', verifyJWT, async (req,res)=>{
+
+    const id = req.params.id
+    const author_id = req.id
+ 
+    const foundActivity = ActivityController.getActivity({id, author_id})
+    
+    return res.json(foundActivity)
+
+})
+
+router.get('/delete-activity/:id', verifyJWT, async (req,res)=>{
+
+    const id = req.params.id
+    const author_id = req.id
+ 
+    const deletedActivity = ActivityController.deleteActivity({id, author_id})
+    
+    return res.json(deletedActivity)
+
+})
+
+router.get('/create-activity', verifyJWT, async (req,res)=>{
+
+    const {name,description,beginsdate, expiresdate, status} = req.body
+    
+    const author_id = req.id
+ 
+    const createdActivity = ActivityController.createActivity({name,description,beginsdate, expiresdate, status, author_id})
+    
+    return res.json(createdActivity)
+
+})
+
+router.get('/edit-activity', verifyJWT, async (req,res)=>{
+
+    const {id, name,description,beginsdate, expiresdate, status} = req.body
+    
+    const author_id = req.id
+ 
+    const updatedActivity = ActivityController.updatedActivity({id,name,description,beginsdate, expiresdate, status, author_id})
+    
+    return res.json(updatedActivity)
 
 })
 

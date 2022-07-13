@@ -15,7 +15,6 @@ const verifyJWT = (req,res,next) => {
             return res.json({auth: false, message: 'vc precisa se autenticar'})
         }
 
-
         req.id = decoded.id
         next()
 

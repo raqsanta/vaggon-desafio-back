@@ -4,17 +4,19 @@ module.exports = {
 
     async createActivity(values){
 
-        const {name,description,beginsdate, expiresdate, status} = values
+        const {name,description,beginsdate, expiresdate, status, author_id} = values
 
-        const createdActivity = await Activity.create({name,description,beginsdate,expiresdate,status})
+        const createdActivity = await Activity.create({name,description,beginsdate,expiresdate,status,author_id})
 
         return {type: 'success', message: 'Atividade criada com sucesso!', data: createdActivity}
 
     },
 
-    async getActivity(id){
+    async getActivity(values){
 
-        const foundActivity = await Activity.findOne({where: {id: id}})
+        const {id, author_id} = values
+
+        const foundActivity = await Activity.findOne({where: {id: id, author_id: author_id}})
 
         return {type: 'success', message: 'Atividade encontrada com sucesso!', data: foundActivity}
 
@@ -30,17 +32,19 @@ module.exports = {
 
     async updateActivity(values){
 
-        const {name,description,beginsdate, expiresdate, status} = values
+        const {id, author_id, name,description,beginsdate, expiresdate, status} = values
 
-        const updatedActivity = await Activity.update({name,description,beginsdate,expiresdate,status})
+        const updatedActivity = await Activity.update({name,description,beginsdate,expiresdate,status}, {where: {id: id, author_id: author_id}})
        
         return {type: 'success', message: 'Atividade atualizada com sucesso!', data: updatedActivity}
 
     },
 
-    async deleteActivity(id){
+    async deleteActivity(values){
 
-        const deletedActivity = await Activity.destroy({where: {id: id}})
+        const {id, author_id} = values
+
+        const deletedActivity = await Activity.destroy({where: {id: id, author_id: author_id}})
 
         return {type: 'success', message: 'Atividade deletada com sucesso!', data: deletedActivity}
 
