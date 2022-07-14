@@ -26,6 +26,8 @@ module.exports = {
 
         const foundActivity = await Activity.findAll({where: {author_id: author_id}})
 
+        console.log(foundActivity)
+
         return {type: 'success', message: 'Atividade encontrada com sucesso!', data: foundActivity}
 
     },

@@ -5,22 +5,10 @@ const { verifyJWT } = require('./functions');
 const router = express.Router();
 
 router.get('/', verifyJWT, (req, res) => {
-    return res.json('vc entrou na rota main')
+    return res.json({auth: true})
 })
 
-router.get('/teste', async (req, res) => {
-
-    const createdUser = await UserController.createUser(
-        {
-            username: 'duda',
-            password: 'senhateste'
-        }
-    )
-
-    return res.json(createdUser)
-})
-
-router.get('/register', async (req,res)=>{
+router.post('/register', async (req,res)=>{
 
     const {username, password} = req.body
 
@@ -39,8 +27,8 @@ router.get('/my-activities', verifyJWT, async (req,res)=>{
 
     const author_id = req.id
  
-    const getAllActivities = ActivityController.getAllActivityFromUser(author_id)
-    
+    const getAllActivities = await ActivityController.getAllActivityFromUser(author_id)
+
     return res.json(getAllActivities)
 
 })
@@ -50,7 +38,7 @@ router.get('/get-activity/:id', verifyJWT, async (req,res)=>{
     const id = req.params.id
     const author_id = req.id
  
-    const foundActivity = ActivityController.getActivity({id, author_id})
+    const foundActivity = await ActivityController.getActivity({id, author_id})
     
     return res.json(foundActivity)
 
@@ -61,13 +49,13 @@ router.get('/delete-activity/:id', verifyJWT, async (req,res)=>{
     const id = req.params.id
     const author_id = req.id
  
-    const deletedActivity = ActivityController.deleteActivity({id, author_id})
+    const deletedActivity = await ActivityController.deleteActivity({id, author_id})
     
     return res.json(deletedActivity)
 
 })
 
-router.get('/create-activity', verifyJWT, async (req,res)=>{
+router.post('/create-activity', verifyJWT, async (req,res)=>{
 
     const {name,description,beginsdate, expiresdate, status} = req.body
     
@@ -78,14 +66,14 @@ router.get('/create-activity', verifyJWT, async (req,res)=>{
     return res.json(createdActivity)
 
 })
-
-router.get('/edit-activity', verifyJWT, async (req,res)=>{
+    
+router.post('/edit-activity', verifyJWT, async (req,res)=>{
 
     const {id, name,description,beginsdate, expiresdate, status} = req.body
     
     const author_id = req.id
  
-    const updatedActivity = ActivityController.updatedActivity({id,name,description,beginsdate, expiresdate, status, author_id})
+    const updatedActivity = ActivityController.updateActivity({id,name,description,beginsdate, expiresdate, status, author_id})
     
     return res.json(updatedActivity)
 
