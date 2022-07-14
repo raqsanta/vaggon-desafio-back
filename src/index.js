@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mainRoutes = require('./routes/main/routes')
 const adminRoutes = require('./routes/admin/routes')
+const authRoutes = require('./routes/auth/routes')
 require('dotenv/config')
 
 app.use(cors())
@@ -14,6 +15,7 @@ app.get('/', (req,res)=>{
     return res.json({message: 'teste'})
 })
 
+app.use('/auth', authRoutes)
 app.use('/admin', adminRoutes)
 app.use('/main', mainRoutes)
 

@@ -25,8 +25,11 @@ User.genHash = function (password){
     return bcrypt.hash(password, bcrypt.genSaltSync(8))
 }
 
-User.compare = function(password){
-    return bcrypt.compare(password, this.password)
+User.prototype.compare = async function(password){
+
+    const compared = await bcrypt.compare(password, this.password)
+
+    return compared
 }
 
 module.exports = User

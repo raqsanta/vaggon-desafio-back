@@ -1,3 +1,4 @@
+const JWT = require('jsonwebtoken')
 const User = require('../models/User')
 
 module.exports = {
@@ -18,6 +19,23 @@ module.exports = {
 
         return {type: 'success', message: 'User encontrado com sucesso!', data: foundUser}        
 
+    },
+
+    async validatePassword(values){
+
+        const {username, password} = values
+
+        const user = await User.findOne({where: {username: username}})
+
+        const isAuth = await user.compare(password)
+
+        if(isAuth == true){
+            const token = JWT.sign({id: user.id}, process.env.SECRET_JWT, {expiresIn: 3600})
+            return {auth: true, token: token}
+        }else{
+            return {auth: false}
+        }
+        
     },
     
     async updateUser(values){
