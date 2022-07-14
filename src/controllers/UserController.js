@@ -27,6 +27,10 @@ module.exports = {
 
         const user = await User.findOne({where: {username: username}})
 
+        if(!user){
+            return {auth: false}
+        }
+
         const isAuth = await user.compare(password)
 
         if(isAuth == true){

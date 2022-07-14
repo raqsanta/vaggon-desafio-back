@@ -2,7 +2,7 @@ const express = require('express')
 const UserController = require('../../controllers/UserController')
 const router = express()
 
-router.get('/', async (req,res)=>{
+router.post('/', async (req,res)=>{
 
     const username = req.body.username
     const password = req.body.password
@@ -12,7 +12,5 @@ router.get('/', async (req,res)=>{
     return res.json(isValidated)
 
 })
-
-
 
 module.exports = router
