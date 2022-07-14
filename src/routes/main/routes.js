@@ -20,6 +20,21 @@ router.get('/teste', async (req, res) => {
     return res.json(createdUser)
 })
 
+router.get('/register', async (req,res)=>{
+
+    const {username, password} = req.body
+
+    const createdUser = await UserController.createUser(
+        {
+            username,
+            password
+        }
+    )
+
+    return res.json(createdUser)
+
+})
+
 router.get('/my-activities', verifyJWT, async (req,res)=>{
 
     const author_id = req.id
